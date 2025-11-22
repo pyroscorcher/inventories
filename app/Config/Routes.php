@@ -44,7 +44,7 @@ $routes->post('kartu-persediaan/filter', 'InventoryCardController::filter');
 
 // Laporan
 $routes->group('laporan', function($routes) {
-    $routes->get('umum', 'Laporan::umum');
-    $routes->get('barang-masuk', 'Laporan::barangMasuk');
-    $routes->get('barang-keluar', 'Laporan::barangKeluar');
+    $routes->get('umum', 'LaporanUmum::laporanUmum');
+    $routes->get('barang-masuk', 'LaporanBarangMasuk::laporanBarangMasuk');
+    $routes->get('barang-keluar', 'LaporanBarangKeluar::laporanBarangKeluar');
 });
