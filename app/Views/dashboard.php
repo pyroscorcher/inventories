@@ -4,20 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gudang Material Dashboard</title>
-    <!-- Load Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Load Lucide Icons for vector graphics -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-        /* Sidebar transition for responsive hiding/showing */
         .sidebar { transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; }
     </style>
 </head>
@@ -44,15 +39,33 @@
             <h3 class="text-xs font-semibold text-gray-400 pt-4 pb-2">TRANSAKSI</h3>
 
             <a href="<?= base_url('barang-masuk') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
-                <i data-lucide="upload" class="w-5 h-5 mr-3"></i> Barang Masuk
+                <i data-lucide="package-check" class="w-5 h-5 mr-3"></i> Barang Masuk
             </a>
 
             <a href="<?= base_url('barang-keluar') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
-                <i data-lucide="upload" class="w-5 h-5 mr-3"></i> Barang Keluar
+                <i data-lucide="package-minus" class="w-5 h-5 mr-3"></i> Barang Keluar
             </a>
 
             <a href="<?= base_url('stockopname') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
-                <i data-lucide="download" class="w-5 h-5 mr-3"></i> Opname
+                <i data-lucide="warehouse" class="w-5 h-5 mr-3"></i> Opname
+            </a>
+
+            <a href="<?= base_url('kartu-persediaan') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="id-card" class="w-5 h-5 mr-3"></i> Kartu Persediaan
+            </a>
+
+            <h3 class="text-xs font-semibold text-gray-400 pt-4 pb-2">LAPORAN</h3>
+
+            <a href="<?= base_url('laporan/umum') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="clipboard" class="w-5 h-5 mr-3"></i> Laporan Umum
+            </a>
+
+            <a href="<?= base_url('laporan/barang-masuk') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="clipboard-plus" class="w-5 h-5 mr-3"></i> Laporan Masuk
+            </a>
+
+            <a href="<?= base_url('laporan/barang-keluar') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="clipboard-minus" class="w-5 h-5 mr-3"></i> Laporan Keluar
             </a>
 
         </nav>
@@ -151,10 +164,88 @@
                         <p id="data-user" class="text-xl font-bold text-gray-900"><?= $totalUsers ?></p>
                     </div>
                 </div>
-                
-                
             </div>
 
+            <!-- Daftar Produk -->
+            <div class="dashboard-content-wrapper bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
+
+                <a href="<?= base_url('products/create') ?>"
+                class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition mb-3">
+                    Tambah Barang Baru
+                </a>
+
+                <?php if(session()->getFlashdata('success')): ?>
+                    <div class="mb-4 p-3 rounded-lg bg-green-100 text-green-800 border border-green-300">
+                        <?= session()->getFlashdata('success') ?>
+                    </div>
+                <?php endif; ?>
+
+                <table class="min-w-full border border-gray-300 rounded-lg text-left text-sm">
+                    <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-3 py-2 border">No</th>
+                        <th class="px-3 py-2 border">Kode</th>
+                        <th class="px-3 py-2 border">Nama</th>
+                        <th class="px-3 py-2 border">Kategori</th>
+                        <th class="px-3 py-2 border">Satuan</th>
+                        <th class="px-3 py-2 border">Stok</th>
+                        <th class="px-3 py-2 border">Harga Beli</th>
+                        <th class="px-3 py-2 border">Status</th>
+                        <th class="px-3 py-2 border">Aksi</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php foreach($products as $index => $product): ?>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-3 py-2 border"><?= $index + 1 ?></td>
+                            <td class="px-3 py-2 border"><?= $product['code'] ?></td>
+                            <td class="px-3 py-2 border"><?= $product['name'] ?></td>
+                            <td class="px-3 py-2 border"><?= $product['category'] ?? '-' ?></td>
+                            <td class="px-3 py-2 border"><?= $product['unit'] ?></td>
+
+                            <td class="px-3 py-2 border font-bold 
+                                <?= $product['stock'] < 10 ? 'text-red-600' : 'text-green-600' ?>">
+                                <?= $product['stock'] ?>
+                            </td>
+
+                            <td class="px-3 py-2 border">
+                                Rp <?= number_format($product['default_price'], 0, ',', '.') ?>
+                            </td>
+
+                            <td class="px-3 py-2 border">
+                                <span class="px-2 py-1 rounded text-xs font-semibold
+                                    <?= $product['status'] === 'active'
+                                        ? 'bg-green-100 text-green-700'
+                                        : 'bg-gray-200 text-gray-700' ?>">
+                                    <?= ucfirst($product['status']) ?>
+                                </span>
+                            </td>
+
+                            <td class="px-3 py-2 border space-x-1">
+                                <a href="<?= base_url('products/edit/'.$product['id']) ?>"
+                                class="inline-block bg-yellow-400 text-white px-3 py-1 rounded text-xs font-medium hover:bg-yellow-500 transition">
+                                    Edit
+                                </a>
+
+                                <?php if($product['status'] === 'active'): ?>
+                                    <a href="<?= base_url('products/deactivate/'.$product['id']) ?>"
+                                    class="inline-block bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition">
+                                        Nonaktifkan
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?= base_url('products/activate/'.$product['id']) ?>"
+                                    class="inline-block bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition">
+                                        Aktifkan
+                                    </a>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+            </div>
         </main>
     </div>
     <script>      

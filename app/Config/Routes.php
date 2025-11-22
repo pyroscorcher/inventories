@@ -15,36 +15,36 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'authGuard']);
 
 // Products
-$routes->get('/products', 'Products::index');
-$routes->get('/products/create', 'Products::create');
-$routes->post('/products/store', 'Products::store');
-$routes->get('/products/edit/(:num)', 'Products::edit/$1');
-$routes->post('/products/update/(:num)', 'Products::update/$1');
-$routes->get('/products/deactivate/(:num)', 'Products::deactivate/$1');
-$routes->get('/products/activate/(:num)', 'Products::activate/$1');
+$routes->get('/products', 'Products::index', ['filter' => 'authGuard']);
+$routes->get('/products/create', 'Products::create', ['filter' => 'authGuard']);
+$routes->post('/products/store', 'Products::store', ['filter' => 'authGuard']);
+$routes->get('/products/edit/(:num)', 'Products::edit/$1', ['filter' => 'authGuard']);
+$routes->post('/products/update/(:num)', 'Products::update/$1', ['filter' => 'authGuard']);
+$routes->get('/products/deactivate/(:num)', 'Products::deactivate/$1', ['filter' => 'authGuard']);
+$routes->get('/products/activate/(:num)', 'Products::activate/$1', ['filter' => 'authGuard']);
 
 // Barang Masuk
-$routes->get('/barang-masuk', 'ProductPurchaseController::index');
-$routes->get('/barang-masuk/create', 'ProductPurchaseController::create');
-$routes->post('/barang-masuk/store', 'ProductPurchaseController::store');
-$routes->get('barang-masuk/delete/(:num)', 'ProductPurchaseController::delete/$1');
+$routes->get('/barang-masuk', 'ProductPurchaseController::index', ['filter' => 'authGuard']);
+$routes->get('/barang-masuk/create', 'ProductPurchaseController::create', ['filter' => 'authGuard']);
+$routes->post('/barang-masuk/store', 'ProductPurchaseController::store', ['filter' => 'authGuard']);
+$routes->get('barang-masuk/delete/(:num)', 'ProductPurchaseController::delete/$1', ['filter' => 'authGuard']);
 
 // Barang Keluar
-$routes->get('/barang-keluar', 'ProductSaleController::index');
-$routes->post('/barang-keluar/store', 'ProductSaleController::store');
-$routes->get('/barang-keluar/delete/(:num)', 'ProductSaleController::delete/$1');
+$routes->get('/barang-keluar', 'ProductSaleController::index', ['filter' => 'authGuard']);
+$routes->post('/barang-keluar/store', 'ProductSaleController::store', ['filter' => 'authGuard']);
+$routes->get('/barang-keluar/delete/(:num)', 'ProductSaleController::delete/$1', ['filter' => 'authGuard']);
 
 // Stock Opname
-$routes->get('stockopname', 'StockOpname::index');
-$routes->post('stockopname/process', 'StockOpname::process');
+$routes->get('stockopname', 'StockOpname::index', ['filter' => 'authGuard']);
+$routes->post('stockopname/process', 'StockOpname::process', ['filter' => 'authGuard']);
 
 // Kartu Persediaan
-$routes->get('kartu-persediaan', 'InventoryCardController::index');
-$routes->post('kartu-persediaan/filter', 'InventoryCardController::filter');
+$routes->get('kartu-persediaan', 'InventoryCardController::index', ['filter' => 'authGuard']);
+$routes->post('kartu-persediaan/filter', 'InventoryCardController::filter', ['filter' => 'authGuard']);
 
 // Laporan
 $routes->group('laporan', function($routes) {
-    $routes->get('umum', 'LaporanUmum::laporanUmum');
-    $routes->get('barang-masuk', 'LaporanBarangMasuk::laporanBarangMasuk');
-    $routes->get('barang-keluar', 'LaporanBarangKeluar::laporanBarangKeluar');
+    $routes->get('umum', 'LaporanUmum::laporanUmum', ['filter' => 'authGuard']);
+    $routes->get('barang-masuk', 'LaporanBarangMasuk::laporanBarangMasuk', ['filter' => 'authGuard']);
+    $routes->get('barang-keluar', 'LaporanBarangKeluar::laporanBarangKeluar', ['filter' => 'authGuard']);
 });

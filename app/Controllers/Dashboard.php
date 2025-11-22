@@ -12,10 +12,13 @@ class Dashboard extends BaseController
 {
     public function index()
     {
+
         $productModel  = new ProductModel();
         $purchaseModel = new PurchaseModel();
         $saleModel     = new SaleModel();
         $userModel     = new UserModel();
+
+        
 
         $totalCategories = $productModel
                             ->select('category')
@@ -30,6 +33,7 @@ class Dashboard extends BaseController
 
         // Count users
         $totalUsers = $userModel->countAllResults();
+        $productList = $productModel->findAll();
 
         $data = [
             'totalProducts'  => $productModel->countAllResults(),
@@ -38,6 +42,7 @@ class Dashboard extends BaseController
             'totalCategories'=> $totalCategories,
             'totalUnits'     => $totalUnits,
             'totalUsers'     => $totalUsers, 
+            'products'       => $productList
         ];
 
         return view('dashboard', $data);

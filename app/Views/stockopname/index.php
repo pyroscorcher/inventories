@@ -37,15 +37,33 @@
             <h3 class="text-xs font-semibold text-gray-400 pt-4 pb-2">TRANSAKSI</h3>
 
             <a href="<?= base_url('barang-masuk') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
-                <i data-lucide="upload" class="w-5 h-5 mr-3"></i> Barang Masuk
+                <i data-lucide="package-check" class="w-5 h-5 mr-3"></i> Barang Masuk
             </a>
 
             <a href="<?= base_url('barang-keluar') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
-                <i data-lucide="upload" class="w-5 h-5 mr-3"></i> Barang Keluar
+                <i data-lucide="package-minus" class="w-5 h-5 mr-3"></i> Barang Keluar
             </a>
 
             <a href="<?= base_url('stockopname') ?>" class="flex items-center p-3 text-sm text-white bg-indigo-600 rounded-lg">
-                <i data-lucide="download" class="w-5 h-5 mr-3"></i> Opname
+                <i data-lucide="warehouse" class="w-5 h-5 mr-3"></i> Opname
+            </a>
+
+            <a href="<?= base_url('kartu-persediaan') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="id-card" class="w-5 h-5 mr-3"></i> Kartu Persediaan
+            </a>
+
+            <h3 class="text-xs font-semibold text-gray-400 pt-4 pb-2">LAPORAN</h3>
+
+            <a href="<?= base_url('laporan/umum') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="clipboard" class="w-5 h-5 mr-3"></i> Laporan Umum
+            </a>
+
+            <a href="<?= base_url('laporan/barang-masuk') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="clipboard-plus" class="w-5 h-5 mr-3"></i> Laporan Masuk
+            </a>
+
+            <a href="<?= base_url('laporan/barang-keluar') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="clipboard-minus" class="w-5 h-5 mr-3"></i> Laporan Keluar
             </a>
 
         </nav>
