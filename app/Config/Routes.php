@@ -11,7 +11,7 @@ $routes->get('/', 'Auth::index');
 $routes->post('/auth/login', 'Auth::login');
 $routes->get('/logout', 'Auth::logout');
 
-// Protected dashboard
+// dashboard
 $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'authGuard']);
 
 // Products
@@ -33,3 +33,18 @@ $routes->get('barang-masuk/delete/(:num)', 'ProductPurchaseController::delete/$1
 $routes->get('/barang-keluar', 'ProductSaleController::index');
 $routes->post('/barang-keluar/store', 'ProductSaleController::store');
 $routes->get('/barang-keluar/delete/(:num)', 'ProductSaleController::delete/$1');
+
+// Stock Opname
+$routes->get('stockopname', 'StockOpname::index');
+$routes->post('stockopname/process', 'StockOpname::process');
+
+// Kartu Persediaan
+$routes->get('kartu-persediaan', 'InventoryCardController::index');
+$routes->post('kartu-persediaan/filter', 'InventoryCardController::filter');
+
+// Laporan
+$routes->group('laporan', function($routes) {
+    $routes->get('umum', 'Laporan::umum');
+    $routes->get('barang-masuk', 'Laporan::barangMasuk');
+    $routes->get('barang-keluar', 'Laporan::barangKeluar');
+});

@@ -23,63 +23,38 @@
 </head>
 <body class="bg-gray-100 min-h-screen">
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="fixed z-40 inset-y-0 left-0 w-64 bg-white shadow-lg transform lg:translate-x-0 -translate-x-full transition-all duration-300 ease-in-out flex flex-col">
+    <!-- SIDEBAR -->
+    <aside class="fixed z-40 inset-y-0 left-0 w-64 bg-white shadow-lg flex flex-col">
         <div class="h-16 flex items-center p-4 border-b border-gray-200">
             <h1 class="text-xl font-bold text-indigo-700">Gudang Material</h1>
-            <button id="menu-close-button" onclick="document.getElementById('menu-button').click()" class="lg:hidden ml-auto text-gray-500 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
         </div>
 
-        <!-- Navigation Links -->
         <nav class="flex-1 overflow-y-auto p-4 space-y-2">
-            <a href="#" class="flex items-center p-3 text-sm font-semibold text-white bg-indigo-600 rounded-lg shadow-md transition-colors hover:bg-indigo-700">
-                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
-                Dashboard
+
+            <a href="<?= base_url('dashboard') ?>" class="flex items-center p-3 text-sm text-white bg-indigo-600 rounded-lg">
+                <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i> Dashboard
             </a>
 
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">MASTER</h3>
-            <a href="<?= base_url('products') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="package" class="w-5 h-5 mr-3"></i>
-                Barang
+            <h3 class="text-xs font-semibold text-gray-400 pt-4 pb-2">MASTER</h3>
+
+            <a href="<?= base_url('products') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="package" class="w-5 h-5 mr-3"></i> Barang
             </a>
 
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">TRANSAKSI</h3>
-            <a href="<?= base_url("barang-masuk")?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="box" class="w-5 h-5 mr-3"></i>
-                Barang Masuk
-            </a>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="archive" class="w-5 h-5 mr-3"></i>
-                Barang Keluar
+            <h3 class="text-xs font-semibold text-gray-400 pt-4 pb-2">TRANSAKSI</h3>
+
+            <a href="<?= base_url('barang-masuk') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="upload" class="w-5 h-5 mr-3"></i> Barang Masuk
             </a>
 
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">LAPORAN</h3>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="file-text" class="w-5 h-5 mr-3"></i>
-                Laporan Stok
-            </a>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="clipboard-list" class="w-5 h-5 mr-3"></i>
-                Laporan Barang Masuk
-            </a>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="clipboard-check" class="w-5 h-5 mr-3"></i>
-                Laporan Barang Keluar
+            <a href="<?= base_url('barang-keluar') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="upload" class="w-5 h-5 mr-3"></i> Barang Keluar
             </a>
 
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">PENGATURAN</h3>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="users" class="w-5 h-5 mr-3"></i>
-                Manajemen User
+            <a href="<?= base_url('stockopname') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50">
+                <i data-lucide="download" class="w-5 h-5 mr-3"></i> Opname
             </a>
 
-            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">BANTUAN</h3>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="help-circle" class="w-5 h-5 mr-3"></i>
-                Bantuan
-            </a>
         </nav>
     </aside>
 
@@ -182,172 +157,8 @@
 
         </main>
     </div>
-
-    <!-- JavaScript and Firebase Setup -->
-    <script type="module">
-        // Firebase Imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, query, setDoc, doc, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Set Firebase Log Level to Debug
-        setLogLevel('Debug');
-
-        let app, db, auth, userId = null;
-        
-        // UI Element References
-        const sidebarElement = document.getElementById('sidebar');
-        const mainContentElement = document.getElementById('main-content');
-        const menuButton = document.getElementById('menu-button');
-        
-        // --- Mock Data State ---
-        // This data would typically come from Firestore in a real app
-        const dataState = {
-            summary: { barang: 10, barangMasuk: 11, barangKeluar: 14, jenisBarang: 14, satuan: 10, user: 3 },
-            inventory: [
-                { id: 'B0004', name: 'Gesapax 500 SC', type: 'Herbisida', stock: 10, unit: 'Liter' },
-                { id: 'B0005', name: 'Amonia Cair', type: 'Bahan Kimia Pengolahan', stock: 1, unit: 'Liter' },
-            ]
-        };
-
-
-        // --- Firebase Initialization and Authentication ---
-        const initFirebase = async () => {
-            try {
-                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-                app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-                onAuthStateChanged(auth, async (user) => {
-                    if (user) {
-                        userId = user.uid;
-                    } else {
-                        // Attempt sign-in if not authenticated
-                        if (initialAuthToken) {
-                            await signInWithCustomToken(auth, initialAuthToken);
-                        } else {
-                            await signInAnonymously(auth);
-                        }
-                    }
-                    // Update the user ID display regardless of successful sign-in
-                    document.getElementById('user-id-display').textContent = userId || 'N/A';
-                    if (userId) {
-                        setupDataListener();
-                    }
-                });
-            } catch (error) {
-                console.error("Firebase initialization failed:", error);
-            }
-        };
-
-        // --- Data Rendering ---
-        const renderDashboard = () => {
-            // Update summary cards
-            document.getElementById('data-barang').textContent = dataState.summary.barang;
-            document.getElementById('data-barang-masuk').textContent = dataState.summary.barangMasuk;
-            document.getElementById('data-barang-keluar').textContent = dataState.summary.barangKeluar;
-            document.getElementById('data-jenis-barang').textContent = dataState.summary.jenisBarang;
-            document.getElementById('data-satuan').textContent = dataState.summary.satuan;
-            document.getElementById('data-user').textContent = dataState.summary.user;
-
-            // Update inventory table
-            const tableBody = document.getElementById('inventory-table-body');
-            tableBody.innerHTML = '';
-            dataState.inventory.forEach((item, index) => {
-                const row = document.createElement('tr');
-                row.className = 'hover:bg-gray-50';
-                const stockColor = item.stock <= 5 ? 'bg-orange-500' : 'bg-green-500'; // Match the image color scheme
-
-                row.innerHTML = `
-                    <td class="p-4 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
-                    <td class="p-4 whitespace-nowrap text-sm text-gray-500">${item.id}</td>
-                    <td class="p-4 whitespace-nowrap text-sm text-gray-900">${item.name}</td>
-                    <td class="p-4 whitespace-nowrap text-sm text-gray-500">${item.type}</td>
-                    <td class="p-4 whitespace-nowrap text-sm">
-                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${stockColor} text-white">
-                            ${item.stock}
-                        </span>
-                    </td>
-                    <td class="p-4 whitespace-nowrap text-sm text-gray-500">${item.unit}</td>
-                    <td class="p-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button class="text-indigo-600 hover:text-indigo-900" title="Edit Item">
-                            <i data-lucide="edit" class="w-4 h-4"></i>
-                        </button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            // Update summary of displayed rows
-            document.getElementById('row-summary').textContent = `Menampilkan 1 sampai ${dataState.inventory.length} dari ${dataState.inventory.length} data`;
-
-            // Replace lucide icons
-            lucide.createIcons();
-        };
-
-        const setupDataListener = () => {
-            // In a real application, you would set up Firestore listeners here to get real-time data.
-            // For now, we just render the mock data.
-            renderDashboard();
-
-            // Example Firestore listener setup (Uncomment to use real public data):
-            /*
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            // Collection path for public data: /artifacts/{appId}/public/data/inventory
-            const publicCollectionPath = `/artifacts/${appId}/public/data/inventory`;
-            const q = query(collection(db, publicCollectionPath));
-
-            onSnapshot(q, (snapshot) => {
-                dataState.inventory = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                // You would also fetch and update dataState.summary from another collection/doc
-                renderDashboard();
-            }, (error) => {
-                console.error("Error setting up data listener:", error);
-            });
-            */
-        };
-
-        // --- UI Interactions ---
-        const toggleSidebar = () => {
-            const isHidden = sidebarElement.classList.toggle('-translate-x-full');
-            
-            // Adjust main content margin for desktop view
-            if (!isHidden) {
-                mainContentElement.classList.add('lg:ml-64');
-            } else {
-                mainContentElement.classList.remove('lg:ml-64');
-            }
-        };
-
-        // Sidebar toggle on mobile menu button click
-        if (menuButton) {
-            menuButton.addEventListener('click', toggleSidebar);
-        }
-
-        // --- Initialization ---
-        window.addEventListener('load', () => {
-            // Initial state for desktop: sidebar visible, content offset
-            if (window.innerWidth >= 1024) {
-                sidebarElement.classList.remove('-translate-x-full');
-                mainContentElement.classList.add('lg:ml-64');
-            } else {
-                // Initial state for mobile: sidebar hidden, content full width
-                sidebarElement.classList.add('-translate-x-full');
-                mainContentElement.classList.remove('lg:ml-64');
-            }
-            initFirebase();
-            // Create icons on load
-            lucide.createIcons();
-        });
-
-        // Dummy function for user menu click (since the menu UI isn't fully implemented)
-        window.openUserMenu = () => {
-            console.log("User menu clicked! (Placeholder)");
-        }
+    <script>      
+    lucide.createIcons();
     </script>
 </body>
 </html>

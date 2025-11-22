@@ -8,44 +8,44 @@ class CreateStockOpname extends Migration
 {
     public function up()
     {
-        // 1. Buat table tanpa foreign key dulu
         $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
-                'unsigned'       => true,
                 'auto_increment' => true,
             ],
 
             'product_id' => [
                 'type'       => 'INT',
-                'unsigned'   => true,
+                'null'       => false,
             ],
 
             'system_stock' => [
-                'type' => 'INT',
-                'default' => 0,
+                'type'       => 'INT',
+                'null'       => false,
+                'default'    => 0,
             ],
 
             'physical_stock' => [
-                'type' => 'INT',
-                'default' => 0,
+                'type'       => 'INT',
+                'null'       => false,
+                'default'    => 0,
             ],
 
             'difference' => [
-                'type' => 'INT',
-                'default' => 0,
+                'type'       => 'INT',
+                'null'       => false,
+                'default'    => 0,
             ],
 
             'note' => [
-                'type' => 'TEXT',
-                'null' => true,
+                'type'       => 'TEXT',
+                'null'       => true,
             ],
 
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
             ],
-
             'updated_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
@@ -53,15 +53,15 @@ class CreateStockOpname extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('stock_opname', true);
 
-        // 2. Baru tambahkan foreign key secara terpisah
+        // Optional: Add foreign key to products table
         $this->forge->addForeignKey('product_id', 'products', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->processIndexes('stock_opname');
+
+        $this->forge->createTable('stock_opname', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('stock_opname');
+        $this->forge->dropTable('stock_opname', true);
     }
 }
