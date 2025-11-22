@@ -46,7 +46,7 @@
             </a>
 
             <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">TRANSAKSI</h3>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
+            <a href="<?= base_url("barang-masuk")?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
                 <i data-lucide="box" class="w-5 h-5 mr-3"></i>
                 Barang Masuk
             </a>
@@ -201,22 +201,22 @@
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">No. <i data-lucide="arrow-up-down" class="w-3 h-3 ml-1 text-gray-400"></i></div>
+                                <div class="flex items-center">No.</div>
                             </th>
                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">ID Barang <i data-lucide="arrow-up-down" class="w-3 h-3 ml-1 text-gray-400"></i></div>
+                                <div class="flex items-center">ID Barang</div>
                             </th>
                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Nama Barang <i data-lucide="arrow-up-down" class="w-3 h-3 ml-1 text-gray-400"></i></div>
+                                <div class="flex items-center">Nama Barang</div>
                             </th>
                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Jenis Barang <i data-lucide="arrow-up-down" class="w-3 h-3 ml-1 text-gray-400"></i></div>
+                                <div class="flex items-center">Jenis Barang</div>
                             </th>
                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Stok <i data-lucide="arrow-up-down" class="w-3 h-3 ml-1 text-gray-400"></i></div>
+                                <div class="flex items-center">Stok</div>
                             </th>
                             <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Satuan <i data-lucide="arrow-up-down" class="w-3 h-3 ml-1 text-gray-400"></i></div>
+                                <div class="flex items-center">Satuan</div>
                             </th>
                             <th scope="col" class="p-4 relative px-6">
                                 <span class="sr-only">Aksi</span>
@@ -224,6 +224,45 @@
                         </tr>
                     </thead>
                     <tbody id="inventory-table-body" class="bg-white divide-y divide-gray-200">
+                        <?php if (!empty($products)): ?>
+                            <?php foreach ($products as $index => $product): ?>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="p-4 text-sm text-gray-500">
+                                        <?= $index + 1 ?>
+                                    </td>
+                                    <td class="p-4 text-sm font-medium text-gray-900">
+                                        <?= esc($product['code']) ?>
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-700">
+                                        <?= esc($product['name']) ?>
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-500">
+                                        <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
+                                            <?= esc($product['category'] ?? '-') ?>
+                                        </span>
+                                    </td>
+                                    <td class="p-4 text-sm font-bold <?= $product['stock'] < 10 ? 'text-red-600' : 'text-green-600' ?>">
+                                        <?= esc($product['stock']) ?>
+                                    </td>
+                                    <td class="p-4 text-sm text-gray-500">
+                                        <?= esc($product['unit']) ?>
+                                    </td>
+                                    <td class="p-4 text-right text-sm font-medium">
+                                        <a href="<?= base_url('products/delete/' . $product['id']) ?>" 
+                                           onclick="return confirm('Yakin ingin menghapus barang ini?')"
+                                           class="text-red-600 hover:text-red-900 flex items-center justify-end gap-1">
+                                           <i data-lucide="trash-2" class="w-4 h-4"></i> Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="7" class="p-8 text-center text-gray-400">
+                                    Tidak ada data barang ditemukan.
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
 

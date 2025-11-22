@@ -49,7 +49,7 @@
         <!-- Navigation Links -->
         <nav class="flex-1 overflow-y-auto p-4 space-y-2">
             <!-- Dashboard (Inactive) -->
-            <a href="<?= base_url(relativePath: 'dashboard') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
+            <a href="<?= base_url('dashboard') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
                 <i data-lucide="layout-dashboard" class="w-5 h-5 mr-3"></i>
                 Dashboard
             </a>
@@ -62,12 +62,12 @@
             </a>
 
             <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider pt-4 pb-2">TRANSAKSI</h3>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="box" class="w-5 h-5 mr-3"></i>
+            <a href="<?= base_url('barang-masuk') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
+                <i data-lucide="download" class="w-5 h-5 mr-3"></i>
                 Barang Masuk
             </a>
-            <a href="#" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
-                <i data-lucide="archive" class="w-5 h-5 mr-3"></i>
+            <a href="<?= base_url('barang-keluar') ?>" class="flex items-center p-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors">
+                <i data-lucide="upload" class="w-5 h-5 mr-3"></i>
                 Barang Keluar
             </a>
 
@@ -137,6 +137,7 @@
                     <th>Nama</th>
                     <th>Kategori</th>
                     <th>Satuan</th>
+                    <th>Stok</th> <!-- Added Stock Header -->
                     <th>Harga Beli</th>
                     <th>Status</th>
                     <th>Aksi</th>
@@ -150,7 +151,13 @@
                         <td><?= $product['name'] ?></td>
                         <td><?= $product['category'] ?? '-' ?></td>
                         <td><?= $product['unit'] ?></td>
-                        <td><?= number_format($product['default_price'], 0, ',', '.') ?></td>
+                        
+                        <!-- Added Stock Column with conditional styling -->
+                        <td class="<?= $product['stock'] < 10 ? 'text-danger fw-bold' : 'text-success fw-bold' ?>">
+                            <?= $product['stock'] ?>
+                        </td>
+
+                        <td>Rp <?= number_format($product['default_price'], 0, ',', '.') ?></td>
                         <td><?= ucfirst($product['status']) ?></td>
                         <td>
                             <a href="<?= base_url('products/edit/'.$product['id']) ?>" class="btn btn-sm btn-warning">Edit</a>
@@ -210,7 +217,7 @@
                         }
                     }
                     // Update the user ID display regardless of successful sign-in
-                    document.getElementById('user-id-display').textContent = userId || 'N/A';
+                    // document.getElementById('user-id-display').textContent = userId || 'N/A';
                 });
             } catch (error) {
                 console.error("Firebase initialization failed:", error);
