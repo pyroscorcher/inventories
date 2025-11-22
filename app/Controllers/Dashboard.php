@@ -1,28 +1,45 @@
 <?php
 
-    namespace App\Controllers;
-    use App\Models\ProductModel;
+namespace App\Controllers;
 
-    class Dashboard extends BaseController
+use App\Controllers\BaseController;
+use App\Models\ProductModel;
+use App\Models\PurchaseModel;
+use App\Models\SaleModel;
+use App\Models\UserModel;
+
+class Dashboard extends BaseController
+{
+    public function index()
     {
-        public function index()
-        {
-            if (!session()->get('logged_in')) {
-                return redirect()->to('/');
-            }
+        $productModel  = new ProductModel();
+        $purchaseModel = new PurchaseModel();
+        $saleModel     = new SaleModel();
+        $userModel     = new UserModel();
 
-            $productModel = new ProductModel();
-            
-            // Fetch all products ordered by latest created
-            $data['products'] = $productModel->orderBy('id', 'DESC')->findAll();
+        $totalCategories = $productModel
+                            ->select('category')
+                            ->distinct()
+                            ->countAllResults();
 
-            return view('dashboard');
-        }
+        // Count unique units
+        $totalUnits = $productModel
+                        ->select('unit')
+                        ->distinct()
+                        ->countAllResults();
 
-        public function productdelete($id)
-        {
-            $productModel = new ProductModel();
-            $productModel->delete($id);
-            return redirect()->to(base_url('products'))->with('success', 'Data berhasil dihapus');
-        }
+        // Count users
+        $totalUsers = $userModel->countAllResults();
+
+        $data = [
+            'totalProducts'  => $productModel->countAllResults(),
+            'totalPurchases' => $purchaseModel->countAllResults(),
+            'totalSales'     => $saleModel->countAllResults(), 
+            'totalCategories'=> $totalCategories,
+            'totalUnits'     => $totalUnits,
+            'totalUsers'     => $totalUsers, 
+        ];
+
+        return view('dashboard', $data);
     }
+}

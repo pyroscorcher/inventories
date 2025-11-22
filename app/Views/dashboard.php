@@ -83,7 +83,7 @@
         </nav>
     </aside>
 
-    <!-- Main Content Area -->
+    <!--Konten-->
     <div id="main-content" class="transition-all duration-300 ease-in-out lg:ml-64 p-4 lg:p-8">
         
         <header class="h-16 flex items-center justify-between bg-white shadow-md rounded-xl p-4 mb-6 sticky top-0 z-20 lg:hidden">
@@ -96,24 +96,25 @@
             </button>
         </header>
 
-        <!-- Dashboard Header -->
+        <!-- header-->
         <div class="flex items-center mb-6">
             <i data-lucide="layout-dashboard" class="w-6 h-6 text-gray-600 mr-2"></i>
             <h2 class="text-2xl font-semibold text-gray-800">Dashboard</h2>
         </div>
 
-        <!-- Dashboard Content -->
+        <!-- Isi dashboard -->
         <main class="space-y-6">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
                 <div class="bg-white p-6 rounded-xl shadow-lg flex items-center justify-between">
                     <div class="flex items-center space-x-4">
                         <div class="p-3 bg-indigo-100 rounded-full text-indigo-600">
                             <i data-lucide="package" class="w-6 h-6"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Data Barang</p>
-                            <p id="data-barang" class="text-3xl font-bold text-gray-900">10</p>
+                            <p class="text-sm font-medium text-gray-500">Total Barang</p>
+                            <p id="data-barang" class="text-3xl font-bold text-gray-900"><?= $totalProducts ?></p>
                         </div>
                     </div>
                 </div>
@@ -124,8 +125,8 @@
                             <i data-lucide="download" class="w-6 h-6"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Data Barang Masuk</p>
-                            <p id="data-barang-masuk" class="text-3xl font-bold text-gray-900">11</p>
+                            <p class="text-sm font-medium text-gray-500">Total Barang Masuk</p>
+                            <p id="data-barang-masuk" class="text-3xl font-bold text-gray-900"><?= $totalPurchases ?></p>
                         </div>
                     </div>
                 </div>
@@ -136,21 +137,23 @@
                             <i data-lucide="upload" class="w-6 h-6"></i>
                         </div>
                         <div>
-                            <p class="text-sm font-medium text-gray-500">Data Barang Keluar</p>
-                            <p id="data-barang-keluar" class="text-3xl font-bold text-gray-900">14</p>
+                            <p class="text-sm font-medium text-gray-500">Total Barang Keluar</p>
+                            <p id="data-barang-keluar" class="text-3xl font-bold text-gray-900"><?= $totalSales ?></p>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
                 <div class="bg-white p-6 rounded-xl shadow-lg flex items-center space-x-4">
                     <div class="p-3 bg-orange-100 rounded-lg text-orange-600">
                         <i data-lucide="layers" class="w-6 h-6"></i>
                     </div>
                     <div>
                         <p class="text-sm font-medium text-gray-500">Data Jenis Barang</p>
-                        <p id="data-jenis-barang" class="text-xl font-bold text-gray-900">14</p>
+                        <p id="data-jenis-barang" class="text-xl font-bold text-gray-900"><?= $totalCategories ?></p>
                     </div>
                 </div>
 
@@ -160,7 +163,7 @@
                     </div>
                     <div>
                         <p class="text-sm font-medium text-gray-500">Data Satuan</p>
-                        <p id="data-satuan" class="text-xl font-bold text-gray-900">10</p>
+                        <p id="data-satuan" class="text-xl font-bold text-gray-900"><?= $totalUnits ?></p>
                     </div>
                 </div>
 
@@ -170,117 +173,13 @@
                     </div>
                     <div>
                         <p class="text-sm font-medium text-gray-500">Data User</p>
-                        <p id="data-user" class="text-xl font-bold text-gray-900">3</p>
+                        <p id="data-user" class="text-xl font-bold text-gray-900"><?= $totalUsers ?></p>
                     </div>
                 </div>
+                
+                
             </div>
 
-            <div class="bg-white p-4 rounded-xl shadow-lg border-l-4 border-red-500 flex items-center space-x-3">
-                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-500 flex-shrink-0"></i>
-                <p class="text-sm font-medium text-gray-700">Stok barang telah mencapai batas minimum</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 space-y-3 sm:space-y-0">
-                    <div class="flex items-center space-x-2">
-                        <label for="show-data" class="text-sm text-gray-600">Tampilkan</label>
-                        <select id="show-data" class="rounded-lg border-gray-300 shadow-sm text-sm focus:ring-indigo-500 focus:border-indigo-500">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                        </select>
-                        <span class="text-sm text-gray-600">data</span>
-                    </div>
-                    <div class="flex items-center space-x-2 w-full sm:w-auto">
-                        <label for="search" class="text-sm text-gray-600 flex-shrink-0">Cari:</label>
-                        <input type="text" id="search" placeholder="Cari..." class="w-full sm:w-64 rounded-lg border-gray-300 shadow-sm text-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                </div>
-
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">No.</div>
-                            </th>
-                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">ID Barang</div>
-                            </th>
-                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Nama Barang</div>
-                            </th>
-                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Jenis Barang</div>
-                            </th>
-                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Stok</div>
-                            </th>
-                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <div class="flex items-center">Satuan</div>
-                            </th>
-                            <th scope="col" class="p-4 relative px-6">
-                                <span class="sr-only">Aksi</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="inventory-table-body" class="bg-white divide-y divide-gray-200">
-                        <?php if (!empty($products)): ?>
-                            <?php foreach ($products as $index => $product): ?>
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="p-4 text-sm text-gray-500">
-                                        <?= $index + 1 ?>
-                                    </td>
-                                    <td class="p-4 text-sm font-medium text-gray-900">
-                                        <?= esc($product['code']) ?>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-700">
-                                        <?= esc($product['name']) ?>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-500">
-                                        <span class="px-2 py-1 text-xs font-semibold text-blue-800 bg-blue-100 rounded-full">
-                                            <?= esc($product['category'] ?? '-') ?>
-                                        </span>
-                                    </td>
-                                    <td class="p-4 text-sm font-bold <?= $product['stock'] < 10 ? 'text-red-600' : 'text-green-600' ?>">
-                                        <?= esc($product['stock']) ?>
-                                    </td>
-                                    <td class="p-4 text-sm text-gray-500">
-                                        <?= esc($product['unit']) ?>
-                                    </td>
-                                    <td class="p-4 text-right text-sm font-medium">
-                                        <a href="<?= base_url('products/delete/' . $product['id']) ?>" 
-                                           onclick="return confirm('Yakin ingin menghapus barang ini?')"
-                                           class="text-red-600 hover:text-red-900 flex items-center justify-end gap-1">
-                                           <i data-lucide="trash-2" class="w-4 h-4"></i> Hapus
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="7" class="p-8 text-center text-gray-400">
-                                    Tidak ada data barang ditemukan.
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-
-                <!-- Table Footer/Pagination -->
-                <div class="flex flex-col sm:flex-row justify-between items-center mt-4 space-y-3 sm:space-y-0">
-                    <p id="row-summary" class="text-sm text-gray-700">
-                    </p>
-                    <div class="flex items-center space-x-1">
-                        <button class="p-2 border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-100 disabled:opacity-50" disabled>
-                            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-                        </button>
-                        <span class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg">1</span>
-                        <button class="p-2 border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-100 disabled:opacity-50" disabled>
-                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 
