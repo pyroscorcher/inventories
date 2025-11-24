@@ -29,7 +29,7 @@ class LaporanUmum extends BaseController
             'total_qty_keluar'        => $keluar['total_qty_keluar'] ?? 0,
             'total_transaksi_keluar'  => $keluar['total_transaksi_keluar'] ?? 0,
 
-            'grand_total'             => ($masuk['total_transaksi_masuk'] ?? 0) + ($keluar['total_transaksi_keluar'] ?? 0),
+            'grand_total'             => ($keluar['total_transaksi_keluar'] ?? 0) - ($masuk['total_transaksi_masuk'] ?? 0),
         ];
 
         $html = view('laporan/umum_pdf', $data);

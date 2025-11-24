@@ -8,7 +8,6 @@ class CreateStockOpname extends Migration
 {
     public function up()
     {
-        // 1. Buat table tanpa foreign key dulu
         $this->forge->addField([
             'id' => [
                 'type'           => 'INT',
@@ -17,22 +16,23 @@ class CreateStockOpname extends Migration
             ],
 
             'product_id' => [
-                'type'       => 'INT',
-                'unsigned'   => true,
+                'type'     => 'INT',
+                'unsigned' => true,   // MUST MATCH products.id
+                'null'     => false,
             ],
 
             'system_stock' => [
-                'type' => 'INT',
+                'type'    => 'INT',
                 'default' => 0,
             ],
 
             'physical_stock' => [
-                'type' => 'INT',
+                'type'    => 'INT',
                 'default' => 0,
             ],
 
             'difference' => [
-                'type' => 'INT',
+                'type'    => 'INT',
                 'default' => 0,
             ],
 
@@ -53,15 +53,15 @@ class CreateStockOpname extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('stock_opname', true);
 
-        // 2. Baru tambahkan foreign key secara terpisah
+        // Add Foreign Key
         $this->forge->addForeignKey('product_id', 'products', 'id', 'CASCADE', 'CASCADE');
-        $this->forge->processIndexes('stock_opname');
+
+        $this->forge->createTable('stock_opname', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('stock_opname');
+        $this->forge->dropTable('stock_opname', true);
     }
 }
