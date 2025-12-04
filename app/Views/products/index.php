@@ -160,6 +160,11 @@
                                     Aktifkan
                                 </a>
                             <?php endif; ?>
+
+                            <a href="<?= base_url('products/delete/'.$product['id']) ?>"
+                            class="inline-block bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

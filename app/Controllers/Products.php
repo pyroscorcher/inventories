@@ -84,4 +84,10 @@ class Products extends BaseController
         return redirect()->to('/products')->with('success', 'Product reactivated.');
     }
 
+    public function delete($id)
+    {
+        $this->productModel->delete($id);
+        return redirect()->to('/products')->with('success', 'Product deleted permanently.');
+    }
+
 }

@@ -22,6 +22,7 @@ $routes->get('/products/edit/(:num)', 'Products::edit/$1', ['filter' => 'authGua
 $routes->post('/products/update/(:num)', 'Products::update/$1', ['filter' => 'authGuard']);
 $routes->get('/products/deactivate/(:num)', 'Products::deactivate/$1', ['filter' => 'authGuard']);
 $routes->get('/products/activate/(:num)', 'Products::activate/$1', ['filter' => 'authGuard']);
+$routes->get('/products/delete/(:num)', 'Products::delete/$1', ['filter' => 'authGuard']);
 
 // Barang Masuk
 $routes->get('/barang-masuk', 'ProductPurchaseController::index', ['filter' => 'authGuard']);
