@@ -41,17 +41,18 @@ if (getcwd() . DIRECTORY_SEPARATOR !== FCPATH) {
  *---------------------------------------------------------------
  * BOOTSTRAP THE APPLICATION
  *---------------------------------------------------------------
- * This process sets up the path constants, loads and registers
- * our autoloader, along with Composer's, loads our constants
- * and fires up an environment-specific bootstrapping.
  */
 
 // LOAD OUR PATHS CONFIG FILE
-// This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../app/Config/Paths.php';
-// ^^^ Change this line if you move your application folder
+// (Updated for InfinityFree: removed "../")
+require FCPATH . 'app/Config/Paths.php';
 
 $paths = new Paths();
+
+// LOAD COMPOSER AUTOLOADER (if needed)
+if (is_file(FCPATH . 'vendor/autoload.php')) {
+    require FCPATH . 'vendor/autoload.php';
+}
 
 // LOAD THE FRAMEWORK BOOTSTRAP FILE
 require $paths->systemDirectory . '/Boot.php';
